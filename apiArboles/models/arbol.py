@@ -29,8 +29,36 @@ class Arbol(models.Model):
     des = models.BooleanField(max_length=100, verbose_name="Descope", null=True, blank=True)
     no = models.BooleanField(max_length=100, verbose_name="Normal", null=True, blank=True)    
     
-    densidad = models.CharField(max_length=100, verbose_name="Estado Fisico Copa Densidad", null=True, blank=True)
-    general_estado = models.CharField(max_length=100, verbose_name="Estado Fisico Copa General (Estado)", null=True, blank=True)
+    DENSO = "1 D_Denso"
+    MEDIO = "2 M_Medio"
+    RALO = "3 R_Ralo"
+    MUY_RALO = "4 MR_Muy Ralo"
+
+    DENSIDAD_CHOICES = (
+        (DENSO, "1 D_Denso"),
+        (MEDIO, "2 M_Medio"),
+        (RALO, "3 R_Ralo"),
+        (MUY_RALO, "4 MR_Muy Ralo")
+    )
+    densidad = models.CharField(
+        max_length=100, verbose_name="Estado Fisico Copa Densidad",
+        choices=DENSIDAD_CHOICES,
+        null=True, blank=True)
+    
+    BUENO = "1 Bu_Bueno"
+    REGULAR = "2 Re_Regular"
+    MALO = "3 Ma_Malo"
+    
+    GENERAL_ESTADO_CHOICES = (
+        (BUENO, "1 Bu_Bueno"),
+        (REGULAR, "2 Re_Regular"),
+        (MALO, "3 Ma_Malo")
+    )
+
+    general_estado = models.CharField(max_length=100,
+        verbose_name="Estado Fisico Copa General (Estado)",
+        choices=GENERAL_ESTADO_CHOICES,
+        null=True, blank=True)
     
     # Estado Físico FUSTE
     b = models.BooleanField(max_length=100, verbose_name="Bifurcado", null=True, blank=True)
@@ -60,10 +88,48 @@ class Arbol(models.Model):
     cav = models.BooleanField(max_length=100, verbose_name="Cavidad", null=True, blank=True)
     ap = models.BooleanField(max_length=100, verbose_name="Arquitectura Pobre", null=True, blank=True)
     ci = models.BooleanField(verbose_name="Corteza Incluida", null=True, blank=True)
-    general_fuste = models.CharField(max_length=100, verbose_name="Estado Fisico Fuste General", null=True, blank=True)
+    
+    BUENO = "1 Bu_Bueno"
+    REGULAR = "2 Re_Regular"
+    MALO = "3 Ma_Malo"
+    SUPRIMIDO = "4 Su_Suprimido"
+    
+    GENERAL_FUSTE_CHOICES = (
+        (BUENO, "1 Bu_Bueno"),
+        (REGULAR, "2 Re_Regular"),
+        (MALO, "3 Ma_Malo"),
+        (SUPRIMIDO, "4 Su_Suprimido")
+    )
+    general_fuste = models.CharField(max_length=100,
+        verbose_name="Estado Fisico Fuste General",
+        choices=GENERAL_FUSTE_CHOICES,
+        null=True, blank=True)
     
     #Raiz
-    especifico = models.CharField(max_length=100, verbose_name="Estado Fisico Raiz Específico", null=True, blank=True)
+    RD_RAICES = "1 RD_Raíces Descubiertas"
+    PRADR_PODA = "2 PRADR_Poda Raíz Antitécnica dentro del rádio crítico"
+    PRT_PODA = "3 PRT_Poda Raíz Técnica"
+    NA_NO = "4 Na_No apreciable"
+    PRAFR_PODA = "5 PRAFR_Poda Raíz Antitécnica fuera del rádio crítico"
+    RES_RAICES = "6 Res_Raices estranguladoras"
+    REN_RAICES = "7 REn_Raices entorchadas"
+    MON_MONTICULO = "8 Mon_Montículo"
+
+    ESPECIFICO_RAIZ_CHOICES = (
+        (RD_RAICES, "1 RD_Raíces Descubiertas"),
+        (PRADR_PODA, "2 PRADR_Poda Raíz Antitécnica dentro del rádio crítico"),
+        (PRT_PODA, "3 PRT_Poda Raíz Técnica"),
+        (NA_NO, "4 Na_No apreciable"),
+        (PRAFR_PODA, "5 PRAFR_Poda Raíz Antitécnica fuera del rádio crítico"),
+        (RES_RAICES, "6 Res_Raices estranguladoras"),
+        (REN_RAICES, "7 REn_Raices entorchadas"),
+        (MON_MONTICULO, "8 Mon_Montículo"),
+    )
+    especifico = models.CharField(max_length=100,
+        verbose_name="Estado Fisico Raiz Específico",
+        choices=ESPECIFICO_RAIZ_CHOICES,
+        null=True, blank=True)
+    
     ed_espacio = models.CharField(max_length=100, verbose_name="Espacio Disponible para el desarrollo radicular", null=True, blank=True)
     general_raiz = models.CharField(max_length=100, verbose_name="Estado Fisico Raiz General", null=True, blank=True)
     
